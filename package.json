@@ -1,19 +1,28 @@
 {
-  "name": "node-mac-permissions",
-  "version": "2.2.0",
+  "name": "@hurdlegroup/node-mac-permissions",
+  "version": "0.0.0-development",
   "description": "A native node module to manage system permissions on macOS",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
     "build": "node-gyp rebuild",
+    "build-debug": "node-gyp rebuild --debug",
     "clean": "node-gyp clean",
     "lint": "clang-format --dry-run -Werror permissions.mm && prettier --check index.js",
     "format": "clang-format -i permissions.mm && prettier --write index.js",
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "install": "prebuild-install --runtime napi || node install.js",
+    "prebuild": "prebuild --all --runtime napi"
   },
+  "maintainers": [
+    {
+      "name": "Daniel McAssey",
+      "email": "daniel.mcassey@hurdle.live"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codebytere/node-mac-permissions.git"
+    "url": "git+https://github.com/hurdlegroup/node-mac-permissions.git"
   },
   "keywords": [
     "permissions",
@@ -24,22 +33,35 @@
   ],
   "author": "Shelley Vohr <shelley.vohr@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/codebytere/node-mac-permissions/issues"
+  "gypfile": true,
+  "binary": {
+    "napi_versions": [
+      3
+    ]
   },
-  "homepage": "https://github.com/codebytere/node-mac-permissions#readme",
+  "bugs": {
+    "url": "https://github.com/hurdlegroup/node-mac-permissions/issues"
+  },
+  "homepage": "https://github.com/hurdlegroup/node-mac-permissions#readme",
   "dependencies": {
     "bindings": "^1.5.0",
-    "node-addon-api": "^3.0.2"
+    "node-addon-api": "^4.2.0",
+    "prebuild-install": "^7.0.0"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "@semantic-release/npm": "^8.0.3",
     "chai": "^4.2.0",
     "clang-format": "^1.4.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.3",
     "mocha": "^8.2.1",
     "node-gyp": "^7.1.2",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "node-abi": "^2.26.0",
+    "prebuild": "^11.0.0"
   },
   "husky": {
     "hooks": {
@@ -53,5 +75,8 @@
     "*.mm": [
       "clang-format -i"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
