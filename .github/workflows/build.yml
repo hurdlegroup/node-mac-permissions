@@ -2,7 +2,7 @@ name: Build all versions and publish to NPM
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   Publish-NPM:
