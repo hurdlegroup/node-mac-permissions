@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.3.0...v2.4.0) (2022-07-26)
+
+
+### Features
+
+* update to support MacOS 10.13+ ([ecc8e8f](https://github.com/hurdlegroup/node-mac-permissions/commit/ecc8e8fc4d0cff37f02ee0b2677920dddc732605))
+
 # [2.3.0](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.2.0...v2.3.0) (2022-02-04)
 
 
