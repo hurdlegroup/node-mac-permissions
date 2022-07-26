@@ -1,56 +1,81 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
- [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Actions Status](https://github.com/codebytere/node-mac-permissions/workflows/Test/badge.svg)](https://github.com/codebytere/node-mac-permissions/actions)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![Actions Status](https://github.com/codebytere/node-mac-permissions/workflows/Test/badge.svg)](https://github.com/codebytere/node-mac-permissions/actions)
 
 # node-mac-permissions
 
+### Table of Contents
+
+- [Overview](#overview)
+- [API](#api)
+ - [`permissions.getAuthStatus(type)`](#permissionsgetauthstatustype)
+ - [`permissions.askForContactsAccess()`](#permissionsaskforcontactsaccess)
+ - [`permissions.askForCalendarAccess()`](#permissionsaskforcalendaraccess)
+ - [`permissions.askForSpeechRecognitionAccess()`](#permissionsaskforspeechrecognitionaccess)
+ - [`permissions.askForRemindersAccess()`](#permissionsaskforremindersaccess)
+ - [`permissions.askForFoldersAccess(folder)`](#permissionsaskforfoldersaccessfolder)
+ - [`permissions.askForFullDiskAccess()`](#permissionsaskforfulldiskaccess)
+ - [`permissions.askForCameraAccess()`](#permissionsaskforcameraaccess)
+ - [`permissions.askForInputMonitoringAccess()`](#permissionsaskforinputmonitoringaccess)
+ - [`permissions.askForMicrophoneAccess()`](#permissionsaskformicrophoneaccess)
+ - [`permissions.askForMusicLibraryAccess()`](#permissionsaskformusiclibraryaccess)
+ - [`permissions.askForPhotosAccess()`](#permissionsaskforphotosaccess)
+ - [`permissions.askForScreenCaptureAccess()`](#permissionsaskforscreencaptureaccess)
+ - [`permissions.askForAccessibilityAccess()`](#permissionsaskforaccessibilityaccess)
+- [FAQ](#faq)
+
+## Overview
+
 ```js
-$ npm i node-mac-permissions
+$ npm i @hurdlegroup/node-mac-permissions
 ```
 
 This native Node.js module allows you to manage an app's access to:
 
+* Accessibility
+* Calendar
+* Camera
 * Contacts
 * Full Disk Access
-* Calendar
-* Reminders
-* Camera
+* Input Monitoring
+* Location
 * Microphone
 * Photos
-* Accessibility
-* Location
+* Protected Folders
+* Reminders
 * Screen Capture
 * Speech Recognition
-* Protected Folders
 
 If you need to ask for permissions, your app must be allowed to ask for permission :
 
-* for a Nodejs script/app, you can use a terminal app such as [iTerm2](https://iterm2.com/) (it won't work on macOS Terminal.app)
-* for an Electron app (or equivalent), you'll have to update `Info.plist` to include a usage description key like `NSMicrophoneUsageDescription` for microphone permission.
+* For a Nodejs script/app, you can use a terminal app such as [iTerm2](https://iterm2.com/) (it won't work on macOS Terminal.app)
+* For an Electron app (or equivalent), you'll have to update `Info.plist` to include a usage description key like `NSMicrophoneUsageDescription` for microphone permission.
+
+If you're using macOS 12.3 or newer, you'll need to ensure you have Python installed on your system, as macOS does not bundle it anymore.
 
 ## API
 
-## `permissions.getAuthStatus(type)`
+### `permissions.getAuthStatus(type)`
 
-* `type` String - The type of system component to which you are requesting access. Can be one of `accessibility`, `bluetooth`, `calendar`, `camera`, `contacts`, `full-disk-access`, `speech-recognition`, `location`, `microphone`, `photos`, `screen`, or `reminders`.
+* `type` String - The type of system component to which you are requesting access. Can be one of `accessibility`, `bluetooth`, `calendar`, `camera`, `contacts`, `full-disk-access`, `input-monitoring`, `location`, `microphone`,`photos`, `reminders`, `screen`, or `speech-recognition`.
 
 Returns `String` - Can be one of `not determined`, `denied`, `authorized`, or `restricted`.
 
 Checks the authorization status of the application to access `type` on macOS.
 
-Return Value Descriptions: 
+Return Value Descriptions:
 * `not determined` - The user has not yet made a choice regarding whether the application may access `type` data.
 * `restricted` - The application is not authorized to access `type` data. The user cannot change this application’s status, possibly due to active restrictions such as parental controls being in place.
 * `denied` - The user explicitly denied access to `type` data for the application.
 * `authorized` - The application is authorized to access `type` data.
+* `limited` - The application is authorized for limited access to `type` data. Currently only applicable to the `photos` type.
 
 **Notes:**
-  * Access to `contacts` will always return a status of `authorized` prior to macOS 10.11, as the underlying API was not introduced until that version.
-  * Access to `camera` and `microphone` will always return a status of `authorized` prior to macOS 10.14, as the underlying API was not introduced until that version.
-  * Access to `screen` will always return a status of `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
-  * Access to `photos` will always return a status of `authorized` prior to macOS 10.13, as the underlying API was not introduced until that version.
-  * Access to `speech-recognition` will always return a status of `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
-  * Access to `bluetooth` will always return a status of `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
-  * Access to `music-library` will always return a status of `authorized` prior to macOS 11.0, as the underlying API was not introduced until that version.
+* Access to `bluetooth` will always return a status of `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
+* Access to `camera` and `microphone` will always return a status of `authorized` prior to macOS 10.14, as the underlying API was not introduced until that version.
+* Access to `input-monitoring` will always return a status of `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
+* Access to `music-library` will always return a status of `authorized` prior to macOS 11.0, as the underlying API was not introduced until that version.
+* Access to `screen` will always return a status of `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
+* Access to `speech-recognition` will always return a status of `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
 
 Example:
 ```js
@@ -60,14 +85,16 @@ const types = [
   'calendar',
   'camera',
   'contacts',
-  'reminders',
   'full-disk-access',
+  'input-monitoring',
   'location',
   'microphone',
   'music-library',
-  'photos',
+  'photos-add-only',
+  'photos-read-write',
+  'reminders',
+  'speech-recognition',
   'screen',
-  'speech-recognition'
 ]
 
 for (const type of types) {
@@ -76,7 +103,7 @@ for (const type of types) {
 }
 ```
 
-## `permissions.askForContactsAccess()`
+### `permissions.askForContactsAccess()`
 
 Returns `Promise<String>` - Whether or not the request succeeded or failed; can be `authorized` or `denied`.
 
@@ -87,8 +114,6 @@ Your app’s `Info.plist` file must provide a value for the `NSContactsUsageDesc
 <string>Your reason for wanting to access the Contact store</string>
 ```
 
-**Note:** `status` will be resolved back as `authorized` prior to macOS 10.11, as the underlying API was not introduced until that version.
-
 Example:
 ```js
 const { askForContactsAccess } = require('node-mac-permissions')
@@ -98,7 +123,7 @@ askForContactsAccess().then(status => {
 })
 ```
 
-## `permissions.askForCalendarAccess()`
+### `permissions.askForCalendarAccess()`
 
 Returns `Promise<String>` - Whether or not the request succeeded or failed; can be `authorized` or `denied`.
 
@@ -111,14 +136,15 @@ askForCalendarAccess().then(status => {
 })
 ```
 
-## `permissions.askForSpeechRecognitionAccess()`
+### `permissions.askForSpeechRecognitionAccess()`
 
-Returns `Promise<String>` - Whether or not the request succeeded or failed; can be `authorized` or `denied`.
+Returns `Promise<String>` - Whether or not the request succeeded or failed; can be `authorized`, `denied`, or `restricted`.
 
 Checks the authorization status for Speech Recognition access. If the status check returns:
 
 * `not determined` - The Speech Recognition access authorization will prompt the user to authorize or deny. The Promise is resolved after the user selection with either `authorized` or `denied`.
 * `denied` - The `Security & Privacy` System Preferences window is opened with the Speech Recognition privacy key highlighted. On open of the `Security & Privacy` window, the Promise is resolved as `denied`.
+* `restricted` - The Promise is resolved as `restricted`.
 
 Your app must provide an explanation for its use of Speech Recognition using the `NSSpeechRecognitionUsageDescription` `Info.plist` key;
 
@@ -138,7 +164,7 @@ askForSpeechRecognitionAccess().then(status => {
 
 **Note:** `status` will be resolved back as `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
 
-## `permissions.askForRemindersAccess()`
+### `permissions.askForRemindersAccess()`
 
 Returns `Promise<String>` - Whether or not the request succeeded or failed; can be `authorized` or `denied`.
 
@@ -151,7 +177,7 @@ askForRemindersAccess().then(status => {
 })
 ```
 
-## `permissions.askForFoldersAccess(folder)`
+### `permissions.askForFoldersAccess(folder)`
 
 * `type` String - The folder to which you are requesting access. Can be one of `desktop`, `documents`, or `downloads`.
 
@@ -182,7 +208,7 @@ askForFoldersAccess('desktop').then(status => {
 <string>Your reason for wanting to access the Downloads folder</string>
 ```
 
-## `permissions.askForFullDiskAccess()`
+### `permissions.askForFullDiskAccess()`
 
 There is no API for programmatically requesting Full Disk Access on macOS at this time, and so calling this method will trigger opening of System Preferences at the Full Disk pane of Security and Privacy.
 
@@ -194,7 +220,14 @@ const { askForFullDiskAccess } = require('node-mac-permissions')
 askForFullDiskAccess()
 ```
 
-## `permissions.askForCameraAccess()`
+If you would like your app to pop up a dialog requesting full disk access when your app attempts to access protected resources, you should add the `NSSystemAdministrationUsageDescription` key to your `Info.plist`:
+
+```
+<key>NSSystemAdministrationUsageDescription</key>
+<string>Your reason for wanting Full Disk Access</string>
+```
+
+### `permissions.askForCameraAccess()`
 
 Returns `Promise<String>` - Current permission status; can be `authorized`, `denied`, or `restricted`.
 
@@ -225,7 +258,29 @@ askForCameraAccess().then(status => {
 })
 ```
 
-## `permissions.askForMicrophoneAccess()`
+### `permissions.askForInputMonitoringAccess()`
+
+Returns `Promise<String>` - Current permission status; can be `authorized` or `denied`.
+
+Checks the authorization status for input monitoring access. If the status check returns:
+
+* `not determined` - A dialog will be displayed directing the user to the `Security & Privacy` System Preferences window , where the user can approve your app to monitor keyboard events in the background. The Promise is resolved as `denied`.
+* `denied` - The `Security & Privacy` System Preferences window is opened with the Input Monitoring privacy key highlighted. On open of the `Security & Privacy` window, the Promise is resolved as `denied`.
+
+**Note:**
+
+- `status` will be resolved back as `authorized` prior to macOS 10.15, as the underlying API was not introduced until that version.
+
+Example:
+```js
+const { askForInputMonitoringAccess } = require('node-mac-permissions')
+
+askForInputMonitoringAccess().then(status => {
+  console.log(`Access to Input Monitoring is ${status}`)
+})
+```
+
+### `permissions.askForMicrophoneAccess()`
 
 Returns `Promise<String>` - Current permission status; can be `authorized`, `denied`, or `restricted`.
 
@@ -256,9 +311,9 @@ askForMicrophoneAccess().then(status => {
 })
 ```
 
-## `permissions.askForMusicLibraryAccess()`
+### `permissions.askForMusicLibraryAccess()`
 
-Returns `Promise<String>` - Whether or not the request succeeded or failed; can be `authorized` or `denied`.
+Returns `Promise<String>` - Whether or not the request succeeded or failed; can be `authorized`, `denied`, or `restricted`.
 
 * `not determined` - The Music Library access authorization will prompt the user to authorize or deny. The Promise is resolved after the user selection with either `authorized` or `denied`.
 * `denied` - The `Security & Privacy` System Preferences window is opened with the Music Library privacy key highlighted. On open of the `Security & Privacy` window, the Promise is resolved as `denied`.
@@ -284,7 +339,9 @@ askForMusicLibraryAccess().then(status => {
 })
 ```
 
-## `permissions.askForPhotosAccess()`
+### `permissions.askForPhotosAccess([accessLevel])`
+
+* `accessLevel` String (optional) - The access level being requested of Photos. Can be either `add-only` or `read-write`. Only available on macOS 11 or higher.
 
 Returns `Promise<String>` - Current permission status; can be `authorized`, `denied`, or `restricted`.
 
@@ -294,8 +351,15 @@ Checks the authorization status for Photos access. If the status check returns:
 * `denied` - The `Security & Privacy` System Preferences window is opened with the Photos privacy key highlighted. On open of the `Security & Privacy` window, the Promise is resolved as `denied`.
 * `restricted` - The Promise is resolved as `restricted`.
 
-Your app must provide an explanation for its use of the photo library using the `NSPhotoLibraryUsageDescription` `Info.plist` key.
+Your app must provide an explanation for its use of the photo library using either the `NSPhotoLibraryUsageDescription` or the `NSPhotoLibraryAddUsageDescription` `Info.plist` key.
 
+For requesting add-only access to the user’s photo library:
+```
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>Your reason for wanting to access Photos</string>
+```
+
+For requesting read/write access to the user’s photo library:
 ```
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Your reason for wanting to access Photos</string>
@@ -303,7 +367,8 @@ Your app must provide an explanation for its use of the photo library using the 
 
 **Note:**
 
-- `status` will be resolved back as `authorized` prior to macOS 10.13, as the underlying API was not introduced until that version.
+You should add the `PHPhotoLibraryPreventAutomaticLimitedAccessAlert` key with a Boolean value of `YES` to your app’s `Info.plist` file to prevent the system from automatically presenting the limited library selection prompt. See [`PHAuthorizationStatusLimited`](https://developer.apple.com/documentation/photokit/phauthorizationstatus/phauthorizationstatuslimited?language=objc) for more information.
+
 
 Example:
 
@@ -315,7 +380,7 @@ askForPhotosAccess().then(status => {
 })
 ```
 
-## `permissions.askForScreenCaptureAccess()`
+### `permissions.askForScreenCaptureAccess()`
 
 There is no API for programmatically requesting Screen Capture on macOS at this time, and so calling this method will trigger opening of System Preferences at the Screen Capture pane of Security and Privacy.
 
@@ -327,7 +392,7 @@ const { askForScreenCaptureAccess } = require('node-mac-permissions')
 askForScreenCaptureAccess()
 ```
 
-## `permissions.askForAccessibilityAccess()`
+### `permissions.askForAccessibilityAccess()`
 
 There is no API for programmatically requesting Accessibility access on macOS at this time, and so calling this method will trigger opening of System Preferences at the Accessibility pane of Security and Privacy.
 

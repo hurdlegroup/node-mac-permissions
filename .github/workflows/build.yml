@@ -1,17 +1,17 @@
-name: Build all versions and publish to NPM
+name: Build and publish to NPM
 on:
   push:
     branches:
-      - 'main'
+      - main
 
 jobs:
-  Publish-NPM:
+  publish-npm:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
       - name: Install dependencies
@@ -25,27 +25,18 @@ jobs:
         with:
           name: package-json
           path: package.json
-  BuildAll:
-    needs: Publish-NPM
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ macos-11 ]
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  build:
+    needs: publish-npm
+    runs-on: macos-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
-      - name: Remove existing package.json (Unix)
-        if: ${{ runner.os != 'Windows' }}
+      - name: Remove existing package.json
         run: rm -f package.json
-      - name: Remove existing package.json (Windows)
-        if: ${{ runner.os == 'Windows' }}
-        run: Remove-Item "package.json" -ErrorAction Ignore
       - uses: actions/download-artifact@v2
         with:
           name: package-json

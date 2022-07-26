@@ -1,30 +1,35 @@
 // Type definitions for node-mac-permissions
 // Project: node-mac-permissions
 
-export function askForCalendarAccess(): Promise<'authorized' | 'denied'>
-export function askForContactsAccess(): Promise<'authorized' | 'denied'>
-export function askForFoldersAccess(): Promise<'authorized' | 'denied'>
-export function askForFullDiskAccess(): undefined
-export function askForRemindersAccess(): Promise<'authorized' | 'denied'>
-export function askForCameraAccess(): Promise<'authorized' | 'denied' | 'restricted'>
-export function askForMicrophoneAccess(): Promise<'authorized' | 'denied' | 'restricted'>
-export function askForPhotosAccess(): Promise<'authorized' | 'denied' | 'restricted'>
-export function askForSpeechRecognitionAccess(): Promise<'authorized' | 'denied'>
-export function askForScreenCaptureAccess(): undefined
 export function askForAccessibilityAccess(): undefined
-export function getAuthStatus(authType: AuthType): PermissionType
+export function askForCalendarAccess(): Promise<Omit<PermissionType, 'restricted'>>
+export function askForCameraAccess(): Promise<PermissionType>
+export function askForContactsAccess(): Promise<Omit<PermissionType, 'restricted'>>
+export function askForFoldersAccess(): Promise<Omit<PermissionType, 'restricted'>>
+export function askForFullDiskAccess(): undefined
+export function askForInputMonitoringAccess(): Promise<Omit<PermissionType, 'restricted'>>
+export function askForMicrophoneAccess(): Promise<PermissionType>
+export function askForPhotosAccess(accessType?: 'add-only' | 'read-write'): Promise<PermissionType>
+export function askForRemindersAccess(): Promise<Omit<PermissionType, 'restricted'>>
+export function askForSpeechRecognitionAccess(): Promise<Omit<PermissionType, 'restricted'>>
+export function askForScreenCaptureAccess(): undefined
+export function getAuthStatus(authType: AuthType): PermissionType | 'not determined'
 
 export type AuthType =
-  | 'contacts'
-  | 'calendar'
-  | 'reminders'
-  | 'full-disk-access'
-  | 'camera'
-  | 'photos'
-  | 'speech-recognition'
-  | 'microphone'
-  | 'accessibility'
-  | 'location'
-  | 'screen'
+    | 'accessibility'
+    | 'bluetooth'
+    | 'calendar'
+    | 'camera'
+    | 'contacts'
+    | 'full-disk-access'
+    | 'input-monitoring'
+    | 'location'
+    | 'microphone'
+    | 'music-library'
+    | 'photos-add-only'
+    | 'photos-read-write'
+    | 'reminders'
+    | 'speech-recognition'
+    | 'screen'
 
-export type PermissionType = 'not determined' | 'denied' | 'authorized' | 'restricted'
+export type PermissionType =  'authorized' | 'denied' | 'restricted'

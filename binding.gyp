@@ -18,7 +18,7 @@
     ],
     'defines': [ 'NAPI_DISABLE_CPP_EXCEPTIONS' ],
     "xcode_settings": {
-      "MACOSX_DEPLOYMENT_TARGET": "11.0",
+      "MACOSX_DEPLOYMENT_TARGET": "10.13",
       "SYSTEM_VERSION_COMPAT": 1,
       "OTHER_CPLUSPLUSFLAGS": ["-std=c++14", "-stdlib=libc++"],
       "OTHER_LDFLAGS": [
@@ -30,6 +30,7 @@
         "-framework CoreGraphics",
         "-framework Contacts",
         "-framework EventKit",
+        "-framework IOKit",
         "-framework Photos",
         "-framework Speech",
         "-framework Storekit"

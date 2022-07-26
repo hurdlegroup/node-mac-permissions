@@ -2,19 +2,21 @@ const permissions = require('bindings')('permissions.node')
 
 function getAuthStatus(type) {
   const validTypes = [
-    'contacts',
+    'accessibility',
+    'bluetooth',
     'calendar',
-    'reminders',
-    'full-disk-access',
     'camera',
-    'photos',
-    'speech-recognition',
+    'contacts',
+    'full-disk-access',
+    'input-monitoring',
+    'location',
     'microphone',
     'music-library',
-    'accessibility',
-    'location',
+    'photos-add-only',
+    'photos-read-write',
+    'reminders',
+    'speech-recognition',
     'screen',
-    'bluetooth',
   ]
 
   if (!validTypes.includes(type)) {
@@ -34,18 +36,27 @@ function askForFoldersAccess(folder) {
   return permissions.askForFoldersAccess.call(this, folder)
 }
 
+function askForPhotosAccess(accessLevel = 'add-only') {
+  if (!['add-only', 'read-write'].includes(accessLevel)) {
+    throw new TypeError(`${accessLevel} must be one of either 'add-only' or 'read-write'`)
+  }
+
+  return permissions.askForPhotosAccess.call(this, accessLevel)
+}
+
 module.exports = {
+  askForAccessibilityAccess: permissions.askForAccessibilityAccess,
   askForCalendarAccess: permissions.askForCalendarAccess,
+  askForCameraAccess: permissions.askForCameraAccess,
   askForContactsAccess: permissions.askForContactsAccess,
   askForFoldersAccess,
   askForFullDiskAccess: permissions.askForFullDiskAccess,
+  askForInputMonitoringAccess: permissions.askForInputMonitoringAccess,
   askForRemindersAccess: permissions.askForRemindersAccess,
-  askForCameraAccess: permissions.askForCameraAccess,
   askForMicrophoneAccess: permissions.askForMicrophoneAccess,
   askForMusicLibraryAccess: permissions.askForMusicLibraryAccess,
-  askForPhotosAccess: permissions.askForPhotosAccess,
+  askForPhotosAccess,
   askForSpeechRecognitionAccess: permissions.askForSpeechRecognitionAccess,
   askForScreenCaptureAccess: permissions.askForScreenCaptureAccess,
-  askForAccessibilityAccess: permissions.askForAccessibilityAccess,
   getAuthStatus,
 }
