@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.0...v2.4.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* allow building on windows/linux in addition to mac ([22438a1](https://github.com/hurdlegroup/node-mac-permissions/commit/22438a11ba53deb961baa0aae74d9ca7a3777fbe))
+
 # [2.4.0](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.3.0...v2.4.0) (2022-07-26)
 
 
