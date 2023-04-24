@@ -1,3 +1,11 @@
+## [2.4.2](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.1...v2.4.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* **app:** update screen capture code ([f3ff22f](https://github.com/hurdlegroup/node-mac-permissions/commit/f3ff22fa4e92ea1b075a47b07f66c7d9c17e4525))
+* **build:** update node-gyp ([6cd0727](https://github.com/hurdlegroup/node-mac-permissions/commit/6cd0727919ea722727f65c5c4d10f28722e270df))
+
 ## [2.4.1](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.0...v2.4.1) (2022-07-26)
 
 
