@@ -1,3 +1,10 @@
+## [2.4.3](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.2...v2.4.3) (2023-04-24)
+
+
+### Bug Fixes
+
+* **app:** update tests ([0c4b0b6](https://github.com/hurdlegroup/node-mac-permissions/commit/0c4b0b6e7bfb5908e0fb873ece878c0780c2e7a1))
+
 ## [2.4.2](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.1...v2.4.2) (2023-04-24)
 
 
