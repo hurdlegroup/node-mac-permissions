@@ -1,3 +1,10 @@
+## [2.4.4](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.3...v2.4.4) (2023-04-24)
+
+
+### Bug Fixes
+
+* **app:** fix node-gyp ([e1e1966](https://github.com/hurdlegroup/node-mac-permissions/commit/e1e1966179741d7332a1ac047ee879c9e8fb4a75))
+
 ## [2.4.3](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.2...v2.4.3) (2023-04-24)
 
 
