@@ -1,3 +1,10 @@
+## [2.4.5](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.4...v2.4.5) (2023-04-24)
+
+
+### Bug Fixes
+
+* **app:** update node-addon-api ([ff6ccdc](https://github.com/hurdlegroup/node-mac-permissions/commit/ff6ccdc588d247830730326f6577e67cfbf0b370))
+
 ## [2.4.4](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.3...v2.4.4) (2023-04-24)
 
 
