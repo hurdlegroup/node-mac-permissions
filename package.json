@@ -5,14 +5,14 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "node-gyp rebuild",
-    "build-debug": "node-gyp rebuild --debug",
-    "clean": "node-gyp clean",
+    "build": "node-gyp-build",
+    "build-debug": "node-gyp-build --debug",
     "lint": "clang-format --dry-run -Werror permissions.mm && prettier --check index.js",
     "format": "clang-format -i permissions.mm && prettier --write index.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
-    "install": "prebuild-install --runtime napi || node install.js",
-    "prebuild": "prebuild --all --runtime napi"
+    "install": "node install.js",
+    "prebuild": "prebuild --all --runtime napi",
+    "prebuild-darwin-universal": "prebuildify -t 16.0.0 --napi --strip --arch x64+arm64"
   },
   "maintainers": [
     {
@@ -44,9 +44,8 @@
   },
   "homepage": "https://github.com/hurdlegroup/node-mac-permissions#readme",
   "dependencies": {
-    "bindings": "^1.5.0",
-    "node-addon-api": "*",
-    "prebuild-install": "^7.1.1"
+    "node-addon-api": "^4.3.0",
+    "node-gyp-build": "^4.6.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
@@ -58,15 +57,9 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
     "mocha": "^10.2.0",
-    "node-gyp": "^9.3.1",
+    "prebuildify": "^5.0.1",
     "prettier": "^2.8.8",
-    "prebuild": "^11.0.4",
     "tar": ">=4.4.18"
-  },
-  "overrides": {
-    "prebuild": {
-      "node-gyp": "$node-gyp"
-    }
   },
   "lint-staged": {
     "*.js": [

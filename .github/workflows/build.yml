@@ -1,12 +1,39 @@
-name: Build and publish to NPM
-on:
-  push:
-    branches:
-      - main
-
+name: Build all versions and publish to NPM
+on: push
 jobs:
-  publish-npm:
+  build:
+    name: Build ${{ matrix.build-group }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-11
+            arch: x64
+            build-group: darwin-universal
+    env:
+      BUILD_GROUP: ${{ matrix.build-group }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+          architecture: ${{ matrix.arch }}
+      - name: Install dependencies
+        run: npm install
+      - name: Prebuildify
+        run: npm run prebuild-$BUILD_GROUP
+        shell: bash
+      - uses: actions/upload-artifact@v2
+        with:
+          name: prebuilds
+          path: prebuilds/
+  publish:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -16,31 +43,12 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies
         run: npm ci
+      - uses: actions/download-artifact@v2
+        with:
+          name: prebuilds
+          path: prebuilds
       - name: Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-      - uses: actions/upload-artifact@v2
-        with:
-          name: package-json
-          path: package.json
-  build:
-    needs: publish-npm
-    runs-on: macos-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 'lts/*'
-      - name: Remove existing package.json
-        run: rm -f package.json
-      - uses: actions/download-artifact@v2
-        with:
-          name: package-json
-      - name: Install dependencies
-        run: npm ci
-      - name: Release prebuilt artifacts
-        run: npx prebuild --all --runtime napi -u ${{ secrets.GITHUB_TOKEN }}
