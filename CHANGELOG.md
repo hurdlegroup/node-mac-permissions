@@ -1,3 +1,15 @@
+# [2.5.0](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.5...v2.5.0) (2023-07-13)
+
+
+### Bug Fixes
+
+* **ci:** fix build ([36f0676](https://github.com/hurdlegroup/node-mac-permissions/commit/36f067606ef311fea6be73dd1a575a8ccee8c9c6))
+
+
+### Features
+
+* **ci:** use new packaging method ([e24e2eb](https://github.com/hurdlegroup/node-mac-permissions/commit/e24e2eb8ce2fa1955d52482a6aaa15d7a44f1851))
+
 ## [2.4.5](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.4...v2.4.5) (2023-04-24)
 
 
