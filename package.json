@@ -11,7 +11,7 @@
     "format": "clang-format -i permissions.mm && prettier --write index.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "install": "node install.js",
-    "prebuild": "prebuild --all --runtime napi",
+    "prebuild": "prebuildify -t 16.0.0 --napi --strip",
     "prebuild-darwin-universal": "prebuildify -t 16.0.0 --napi --strip --arch x64+arm64"
   },
   "maintainers": [
