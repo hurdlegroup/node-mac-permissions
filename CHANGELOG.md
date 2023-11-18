@@ -1,3 +1,12 @@
+## [2.5.1](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.0...v2.5.1) (2023-11-18)
+
+
+### Bug Fixes
+
+* **app:** fix builds ([7516992](https://github.com/hurdlegroup/node-mac-permissions/commit/75169927fe0e25ef3bd51f4db15aafe54eaf9fd4))
+* **app:** specify python version ([25373b4](https://github.com/hurdlegroup/node-mac-permissions/commit/25373b469ef4a74bfcef9578650577671c23e262))
+* **app:** use latest node for M1 compat ([695eeb9](https://github.com/hurdlegroup/node-mac-permissions/commit/695eeb96c979e370ebaa6584d24b87e7efd95200))
+
 # [2.5.0](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.4.5...v2.5.0) (2023-07-13)
 
 
