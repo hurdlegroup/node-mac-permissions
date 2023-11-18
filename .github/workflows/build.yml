@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -23,8 +26,6 @@ jobs:
           architecture: ${{ matrix.arch }}
       - name: Install dependencies
         run: npm install
-      - name: Install Python3 Packaging
-        run: python3 -m pip install packaging
       - name: Prebuildify
         run: npm run prebuild-$BUILD_GROUP
         shell: bash
