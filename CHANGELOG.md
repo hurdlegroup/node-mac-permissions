@@ -1,3 +1,10 @@
+## [2.5.3](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.2...v2.5.3) (2023-11-18)
+
+
+### Bug Fixes
+
+* **lib:** add updates ([156cc6f](https://github.com/hurdlegroup/node-mac-permissions/commit/156cc6ff40aefa40e544b28bd841c97050be0c03))
+
 ## [2.5.2](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.1...v2.5.2) (2023-11-18)
 
 
