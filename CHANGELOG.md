@@ -1,3 +1,10 @@
+## [2.5.2](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.1...v2.5.2) (2023-11-18)
+
+
+### Bug Fixes
+
+* **ci:** faster builds ([2f467a2](https://github.com/hurdlegroup/node-mac-permissions/commit/2f467a2297bb7652c2d6e9d5ec58934955318f9d))
+
 ## [2.5.1](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.0...v2.5.1) (2023-11-18)
 
 
