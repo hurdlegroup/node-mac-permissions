@@ -7,20 +7,20 @@
 
 - [Overview](#overview)
 - [API](#api)
- - [`permissions.getAuthStatus(type)`](#permissionsgetauthstatustype)
- - [`permissions.askForContactsAccess()`](#permissionsaskforcontactsaccess)
- - [`permissions.askForCalendarAccess()`](#permissionsaskforcalendaraccess)
- - [`permissions.askForSpeechRecognitionAccess()`](#permissionsaskforspeechrecognitionaccess)
- - [`permissions.askForRemindersAccess()`](#permissionsaskforremindersaccess)
- - [`permissions.askForFoldersAccess(folder)`](#permissionsaskforfoldersaccessfolder)
- - [`permissions.askForFullDiskAccess()`](#permissionsaskforfulldiskaccess)
- - [`permissions.askForCameraAccess()`](#permissionsaskforcameraaccess)
- - [`permissions.askForInputMonitoringAccess()`](#permissionsaskforinputmonitoringaccess)
- - [`permissions.askForMicrophoneAccess()`](#permissionsaskformicrophoneaccess)
- - [`permissions.askForMusicLibraryAccess()`](#permissionsaskformusiclibraryaccess)
- - [`permissions.askForPhotosAccess()`](#permissionsaskforphotosaccess)
- - [`permissions.askForScreenCaptureAccess()`](#permissionsaskforscreencaptureaccess)
- - [`permissions.askForAccessibilityAccess()`](#permissionsaskforaccessibilityaccess)
+    - [`permissions.getAuthStatus(type)`](#permissionsgetauthstatustype)
+    - [`permissions.askForContactsAccess()`](#permissionsaskforcontactsaccess)
+    - [`permissions.askForCalendarAccess()`](#permissionsaskforcalendaraccess)
+    - [`permissions.askForSpeechRecognitionAccess()`](#permissionsaskforspeechrecognitionaccess)
+    - [`permissions.askForRemindersAccess()`](#permissionsaskforremindersaccess)
+    - [`permissions.askForFoldersAccess(folder)`](#permissionsaskforfoldersaccessfolder)
+    - [`permissions.askForFullDiskAccess()`](#permissionsaskforfulldiskaccess)
+    - [`permissions.askForCameraAccess()`](#permissionsaskforcameraaccess)
+    - [`permissions.askForInputMonitoringAccess()`](#permissionsaskforinputmonitoringaccess)
+    - [`permissions.askForMicrophoneAccess()`](#permissionsaskformicrophoneaccess)
+    - [`permissions.askForMusicLibraryAccess()`](#permissionsaskformusiclibraryaccess)
+    - [`permissions.askForPhotosAccess()`](#permissionsaskforphotosaccess)
+    - [`permissions.askForScreenCaptureAccess()`](#permissionsaskforscreencaptureaccess)
+    - [`permissions.askForAccessibilityAccess()`](#permissionsaskforaccessibilityaccess)
 - [FAQ](#faq)
 
 ## Overview
@@ -258,7 +258,9 @@ askForCameraAccess().then(status => {
 })
 ```
 
-### `permissions.askForInputMonitoringAccess()`
+### `permissions.askForInputMonitoringAccess(accessLevel)`
+
+* `accessLevel` String (optional) - The access level being requested of Input Monitoring. Can be either `post` or `listen`. Default is `listen` Only available on macOS 10.15 or higher.
 
 Returns `Promise<String>` - Current permission status; can be `authorized` or `denied`.
 
@@ -341,7 +343,7 @@ askForMusicLibraryAccess().then(status => {
 
 ### `permissions.askForPhotosAccess([accessLevel])`
 
-* `accessLevel` String (optional) - The access level being requested of Photos. Can be either `add-only` or `read-write`. Only available on macOS 11 or higher.
+* `accessLevel` String (optional) - The access level being requested of Photos. Can be either `add-only` or `read-write`. Default is `add-only`. Only available on macOS 11 or higher.
 
 Returns `Promise<String>` - Current permission status; can be `authorized`, `denied`, or `restricted`.
 
@@ -380,9 +382,11 @@ askForPhotosAccess().then(status => {
 })
 ```
 
-### `permissions.askForScreenCaptureAccess()`
+### `permissions.askForScreenCaptureAccess([openPreferences])`
 
-There is no API for programmatically requesting Screen Capture on macOS at this time, and so calling this method will trigger opening of System Preferences at the Screen Capture pane of Security and Privacy.
+* `openPreferences` Boolean (optional) - Whether to open System Preferences if the request to authorize Screen Capture fails or is denied by the user.
+
+Calling this method for the first time within an app session will trigger a permission modal. If this modal is denied, there is no  API for programmatically requesting Screen Capture on macOS at this time. Calling this method after denial with `openPreferences = true` will trigger opening of System Preferences at the Screen Capture pane of Security and Privacy.
 
 Example:
 
@@ -465,4 +469,7 @@ $ tccutil reset SystemPolicyDocumentsFolder <bundleID>
 
 # Reset Downloads folder access
 $ tccutil reset SystemPolicyDownloadsFolder <bundleID>
+
+# Reset Removable Volumes access
+$ tccutil reset SystemPolicyRemovableVolumes <bundleID>
 ```
