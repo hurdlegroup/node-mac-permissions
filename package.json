@@ -11,8 +11,8 @@
     "format": "clang-format -i permissions.mm && prettier --write index.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "install": "node install.js",
-    "prebuild": "prebuildify -t 16.0.0 --napi --strip",
-    "prebuild-darwin-universal": "prebuildify -t 16.0.0 --napi --strip --arch x64+arm64"
+    "prebuild": "prebuildify --napi --strip",
+    "prebuild-darwin-universal": "prebuildify --napi --strip --arch x64+arm64"
   },
   "maintainers": [
     {
@@ -45,13 +45,14 @@
   "homepage": "https://github.com/hurdlegroup/node-mac-permissions#readme",
   "dependencies": {
     "node-addon-api": "*",
-    "node-gyp-build": "^4.6.0"
+    "node-gyp-build": "^4.7.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.7",
-    "@semantic-release/npm": "^10.0.3",
+    "@semantic-release/github": "^9.2.3",
+    "@semantic-release/npm": "^11.0.1",
+    "semantic-release": "^22.0.8",
     "chai": "^4.3.7",
     "clang-format": "1.8.0",
     "husky": "^8.0.3",
