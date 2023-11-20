@@ -24,6 +24,10 @@
       "MACOSX_DEPLOYMENT_TARGET": "10.13",
       "SYSTEM_VERSION_COMPAT": 1,
       "OTHER_CPLUSPLUSFLAGS": ["-std=c++14", "-stdlib=libc++"],
+      "OTHER_CFLAGS": [
+        "-arch x86_64",
+        "-arch arm64"
+      ],
       "OTHER_LDFLAGS": [
         "-framework AppKit",
         "-framework AVFoundation",
@@ -36,7 +40,9 @@
         "-framework IOKit",
         "-framework Photos",
         "-framework Speech",
-        "-framework StoreKit"
+        "-framework StoreKit",
+        "-arch x86_64",
+        "-arch arm64"
       ]
     }
   }]
