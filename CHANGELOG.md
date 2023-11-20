@@ -1,3 +1,10 @@
+## [2.5.4](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.3...v2.5.4) (2023-11-20)
+
+
+### Bug Fixes
+
+* **app:** fix Apple M1 sillicon ([1345058](https://github.com/hurdlegroup/node-mac-permissions/commit/134505864623bf78f5588a408360052b37d50cf6))
+
 ## [2.5.3](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.2...v2.5.3) (2023-11-18)
 
 
