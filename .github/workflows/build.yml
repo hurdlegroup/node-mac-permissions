@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-latest
+          - os: macos-11
             arch: x64
             build-group: darwin-universal
     env:
@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           cache: 'npm'
@@ -42,7 +42,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
           cache: 'npm'

@@ -7,8 +7,8 @@
   "scripts": {
     "build": "node-gyp-build",
     "build-debug": "node-gyp-build --debug",
-    "lint": "clang-format --dry-run -Werror permissions.mm && prettier --check index.js",
-    "format": "clang-format -i permissions.mm && prettier --write index.js",
+    "lint": "clang-format --dry-run -Werror src/permissions.mm && prettier --check index.js",
+    "format": "clang-format -i src/permissions.mm && prettier --write index.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
     "install": "node install.js",
     "prebuild": "prebuildify --napi --strip",
