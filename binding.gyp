@@ -34,8 +34,9 @@
     ],
     "xcode_settings": {
       'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
-      'CLANG_CXX_LIBRARY': 'libc++',
       "MACOSX_DEPLOYMENT_TARGET": "10.13",
+      "SYSTEM_VERSION_COMPAT": 1,
+      "OTHER_CPLUSPLUSFLAGS": ["-std=c++14", "-stdlib=libc++"],
       "OTHER_CFLAGS": [
         "-arch x86_64",
         "-arch arm64"
