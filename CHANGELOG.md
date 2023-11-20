@@ -1,3 +1,10 @@
+## [2.5.7](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.6...v2.5.7) (2023-11-20)
+
+
+### Bug Fixes
+
+* **ci:** tweak build ([b8e40c4](https://github.com/hurdlegroup/node-mac-permissions/commit/b8e40c40a2010fd5aaccafd8d133519ca50d4274))
+
 ## [2.5.6](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.5...v2.5.6) (2023-11-20)
 
 
