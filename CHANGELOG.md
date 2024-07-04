@@ -1,3 +1,10 @@
+## [2.5.8](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.7...v2.5.8) (2024-07-04)
+
+
+### Bug Fixes
+
+* **ci:** update to latest macos runner ([102aa0a](https://github.com/hurdlegroup/node-mac-permissions/commit/102aa0a72e6dad4c2cb4eaffe27b8628030d6905))
+
 ## [2.5.7](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.6...v2.5.7) (2023-11-20)
 
 
