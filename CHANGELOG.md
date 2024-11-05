@@ -1,3 +1,10 @@
+# [2.6.0](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.8...v2.6.0) (2024-11-05)
+
+
+### Features
+
+* **build:** only allow it to be built on MacOS ([483ef75](https://github.com/hurdlegroup/node-mac-permissions/commit/483ef75cd39a42af3328aa1039335a8384821654))
+
 ## [2.5.8](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.7...v2.5.8) (2024-07-04)
 
 
