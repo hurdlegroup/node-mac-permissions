@@ -3,6 +3,7 @@
   "version": "0.0.0-development",
   "description": "A native node module to manage system permissions on macOS",
   "main": "index.js",
+  "os": ["darwin"],
   "types": "index.d.ts",
   "scripts": {
     "build": "node-gyp-build",
@@ -10,7 +11,7 @@
     "lint": "clang-format --dry-run -Werror src/permissions.mm && prettier --check index.js",
     "format": "clang-format -i src/permissions.mm && prettier --write index.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
-    "install": "node install.js",
+    "install": "npm run build",
     "prebuild": "prebuildify --napi --strip",
     "prebuild-darwin-universal": "prebuildify --napi --strip --arch x64+arm64"
   },
