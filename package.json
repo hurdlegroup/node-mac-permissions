@@ -11,7 +11,7 @@
     "lint": "clang-format --dry-run -Werror src/permissions.mm && prettier --check index.js",
     "format": "clang-format -i src/permissions.mm && prettier --write index.js",
     "test": "./node_modules/.bin/mocha --reporter spec",
-    "install": "npm run build",
+    "install": "node-gyp-build",
     "prebuild": "prebuildify --napi --strip",
     "prebuild-darwin-universal": "prebuildify --napi --strip --arch x64+arm64"
   },
