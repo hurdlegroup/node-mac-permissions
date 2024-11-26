@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.6.0...v2.6.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* **package:** fix install on newer npm versions ([5651fdc](https://github.com/hurdlegroup/node-mac-permissions/commit/5651fdcba195a3f2734df06a3a0d3185f7a27f00))
+
 # [2.6.0](https://github.com/hurdlegroup/node-mac-permissions/compare/v2.5.8...v2.6.0) (2024-11-05)
 
 
